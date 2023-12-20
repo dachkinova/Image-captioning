@@ -1,0 +1,64 @@
+<div class="wrapper">
+  <h1>Image Description Generator</h1>
+<!-- <div *ngIf="progressInfos">
+  <span>{{ progressInfos.fileName }}</span>
+  <mat-toolbar class="progress-bar">
+    <mat-progress-bar
+      color="accent"
+      [value]="progressInfos.value"
+    ></mat-progress-bar>
+    <span class="progress">{{ progressInfos.value }}%</span>
+  </mat-toolbar>
+</div> -->
+
+<mat-form-field>
+  <div>
+    <mat-toolbar>
+      <input matInput [value]="selectedFileNames ? selectedFileNames : 'Select Images'" />
+
+      <button
+        mat-flat-button
+        color="primary"
+      >
+        Upload
+      </button>
+    </mat-toolbar>
+
+    <input
+      type="file"
+      id="fileInput"
+      name="fileInput"
+      accept="image/*" 
+      (change)="selectFiles($event)"
+      (click)="myInputFile.value = ''"
+      #myInputFile
+    />
+  </div>
+</mat-form-field>
+
+<mat-card class="example-card" *ngIf="preview && preview!==''">
+  <img mat-card-image [src]="preview" class="preview">
+  <mat-card-content *ngIf="desc!==''">
+    <p>
+      {{desc.english_caption}} 
+     </p>
+    <p>
+     {{desc.bulgarian_caption}} 
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="uploadFiles()">Generate caption</button>
+    <button mat-button (click)="delete()">Delete</button>
+  </mat-card-actions>
+  <mat-card-footer *ngIf="isLoading==true">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
+
+<div *ngIf="message.length" class="message">
+  <ul *ngFor="let msg of message; let i = index">
+    <li>{{ msg }}</li>
+  </ul>
+</div>
+
+</div>
